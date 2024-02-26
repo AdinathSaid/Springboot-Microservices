@@ -1,0 +1,24 @@
+server:
+  port: 8989
+
+eureka:
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: APIGateway
+
+  cloud:
+    discovery:
+      enabled:  true
+    gateway:
+      routes:
+        - id: userservice
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**
+        - id: contactservice
+          uri: lb://contactservice
+          predicates:
+            - Path=/contact/**
